@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-06-27T04:36:35.878Z" agent="5.0 (Windows)" etag="Nv0nhaO5NluBrriaV8XG" version="20.0.3" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-06-27T09:04:40.806Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="yB74tVu8vLsqxrw7LQkq" version="20.0.3" type="github" pages="5">
   <diagram id="9UGvHK0S9YZ4UyB9R5i8" name="Project Flow">
-    <mxGraphModel dx="582" dy="1584" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1202" dy="548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -233,11 +233,20 @@
         <mxCell id="M2t22zkZSVvBccxjwiQY-10" value="&lt;b&gt;Finish&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="90" y="1950" width="120" height="80" as="geometry" />
         </mxCell>
+        <mxCell id="rM1SMTn5vFKjFACvUwvg-1" value="&lt;div style=&quot;text-align: left;&quot;&gt;List of term in domain driven design :&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;1. ubiquitous language&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;2. entity (selalu unik/ punya identifier)&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;3. value object (bisa digunakan di beberapa entity sekaligus) cth : address&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;4. aggregate&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;5. aggregate root&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="270" y="445" width="420" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="rM1SMTn5vFKjFACvUwvg-3" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=-0.007;exitY=0.496;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;" edge="1" parent="1" source="rM1SMTn5vFKjFACvUwvg-1" target="FguDmeDMIgBSosAkrxc6-6">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="275" y="494.5" as="sourcePoint" />
+            <mxPoint x="195" y="494.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="9Hhz547sP4fylKDwdKUl" name="Arie ERD">
-    <mxGraphModel dx="1944" dy="1759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1872" dy="1566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -402,6 +411,11 @@
             <Array as="points">
               <mxPoint x="50" y="125" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aJOQKoGgTi_mQldmC3kl-1" value="book/&lt;br&gt;cancel booking" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="MB0w0KTBGmBn10GscrUR-6">
+          <mxGeometry x="0.3733" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="J5ClZd2KnQnnTD2LxZqZ-37" value="&lt;b&gt;Owner Repository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -789,7 +803,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="CKWldnK6sylF4k0vtNJE" name="Rachman ERD">
-    <mxGraphModel dx="1751" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1872" dy="466" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1189,7 +1203,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="iI7fU0JRtk-AVjAfA2qd" name="Rio ERD">
-    <mxGraphModel dx="582" dy="1584" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1022" dy="466" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />

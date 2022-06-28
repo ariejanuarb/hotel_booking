@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-06-28T11:54:56.994Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="b0seyutbaLrr3cCAKokN" version="20.0.3" type="github" pages="7">
+<mxfile host="app.diagrams.net" modified="2022-06-28T11:59:17.045Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="Zhws_HM0RKLcVpxK9tr8" version="20.0.3" type="github" pages="7">
   <diagram id="9UGvHK0S9YZ4UyB9R5i8" name="Project Flow">
-    <mxGraphModel dx="1702" dy="1024" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="958" dy="576" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1742,7 +1742,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="EE-nKPK8BrA7O0fUe67l" name="Page-7">
-    <mxGraphModel dx="3232" dy="922" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3615" dy="1153" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1934,16 +1934,6 @@
         <mxCell id="4E7Y2Z4R7kvPLD5SU0ed-43" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="4E7Y2Z4R7kvPLD5SU0ed-34" vertex="1">
           <mxGeometry x="155" width="115" height="30" as="geometry">
             <mxRectangle width="115" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="4E7Y2Z4R7kvPLD5SU0ed-37" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="4E7Y2Z4R7kvPLD5SU0ed-28" target="4E7Y2Z4R7kvPLD5SU0ed-2" edge="1">
-          <mxGeometry width="100" height="100" relative="1" as="geometry">
-            <mxPoint x="-1570" y="470" as="sourcePoint" />
-            <mxPoint x="-1575" y="330.0000000000002" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="-1620" y="225" />
-              <mxPoint x="-1620" y="395" />
-            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="RwkWLb-9THUpObUzx17u-1" value="floor" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
@@ -2223,11 +2213,6 @@
             <mxPoint x="-890" y="305" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RwkWLb-9THUpObUzx17u-114" value="Owner Can :&lt;br&gt;See, Create, Update,Delete&lt;br&gt;Assign 1 Employee to 1 hotel" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="RwkWLb-9THUpObUzx17u-113" connectable="0" vertex="1">
-          <mxGeometry x="-0.189" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="RwkWLb-9THUpObUzx17u-118" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="RwkWLb-9THUpObUzx17u-107" target="RwkWLb-9THUpObUzx17u-2" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="-380" y="155" as="sourcePoint" />
@@ -2419,11 +2404,6 @@
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="-891.1999999999998" y="385" as="sourcePoint" />
             <mxPoint x="-611.3299999999999" y="565" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="RwkWLb-9THUpObUzx17u-161" value="Employee : &lt;br&gt;Can See&lt;br&gt;Can Book/Cancel Book" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="RwkWLb-9THUpObUzx17u-160" connectable="0" vertex="1">
-          <mxGeometry x="-0.189" relative="1" as="geometry">
-            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="RwkWLb-9THUpObUzx17u-163" value="PIC" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" parent="1" vertex="1">
@@ -2623,7 +2603,7 @@
           <mxGeometry x="-1625" y="410" width="40" height="30" as="geometry" />
         </mxCell>
         <mxCell id="skIMHKm-3ecbblgHvybh-8" value="0..&lt;sup&gt;n&lt;/sup&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="-1295" y="180" width="40" height="30" as="geometry" />
+          <mxGeometry x="-1295" y="185" width="40" height="30" as="geometry" />
         </mxCell>
         <mxCell id="skIMHKm-3ecbblgHvybh-9" value="0..&lt;sup&gt;n&lt;/sup&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="-1040" y="410" width="40" height="30" as="geometry" />
@@ -2631,14 +2611,51 @@
         <mxCell id="skIMHKm-3ecbblgHvybh-10" value="0..&lt;sup&gt;n&lt;/sup&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="-410" y="680" width="40" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="YtIEfURUHtz2SjncPsk2-1" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="4E7Y2Z4R7kvPLD5SU0ed-28" target="4E7Y2Z4R7kvPLD5SU0ed-2">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-1345" y="320" as="sourcePoint" />
+            <mxPoint x="-1750" y="90" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-1640" y="225" />
+              <mxPoint x="-1640" y="395" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YtIEfURUHtz2SjncPsk2-2" value="Have" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="YtIEfURUHtz2SjncPsk2-1">
+          <mxGeometry x="-0.1871" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="wY4S-Vl-Sl-03dfoEtm3" name="Page-8">
-    <mxGraphModel dx="766" dy="461" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2466" dy="461" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="3wZBNiLtehh7jevsufa0-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="3wZBNiLtehh7jevsufa0-1" target="3wZBNiLtehh7jevsufa0-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3wZBNiLtehh7jevsufa0-3" value="Login" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="3wZBNiLtehh7jevsufa0-2">
+          <mxGeometry x="-0.2" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3wZBNiLtehh7jevsufa0-1" value="owner" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3wZBNiLtehh7jevsufa0-4" value="memilih" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="350" y="60" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="k8CaY9XAW_5RYt8lcxkm-1" value="Owner Can :&lt;br&gt;See, Create, Update,Delete&lt;br&gt;Assign 1 Employee to 1 hotel" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="1">
+          <mxGeometry x="-1103.5714285714284" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="QpJB9qHjqKW14COGvehE-1" value="Employee : &lt;br&gt;Can See&lt;br&gt;Can Book/Cancel Book" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" connectable="0" vertex="1" parent="1">
+          <mxGeometry x="-1147.4285714285716" y="288.8571428571429" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

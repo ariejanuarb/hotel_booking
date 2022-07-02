@@ -1,0 +1,256 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Floor RESTful API",
+    "description": "API Spec for Floor RESTful API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths": {
+    "/floors": {
+      "get": {
+        "security": [{
+          "FloorAuth" : []
+        }],
+        "tags": [
+          "Floor API"
+        ],
+        "description": "List all Floor",
+        "summary": "List all Floors",
+        "responses": {
+          "200": {
+            "description": "Success get all floors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Floor"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [{
+          "FloorAuth" : []
+        }],
+        "tags": [
+          "Floor API"
+        ],
+        "description": "Create New Floor",
+        "summary": "Create new Floor",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref":"#/components/schemas/CreateOrUpdateFloor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succes Create Floor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Floor"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/floors/{floorId}" : {
+      "get" : {
+        "security": [{
+          "FloorAuth" : []
+        }],
+        "tags": ["Floor API"],
+        "summary": "Get Floor by Id",
+        "description": "Get Floor by Id",
+        "parameters": [
+          {
+            "name": "floorId",
+            "in": "path",
+            "description": "Floor Id"
+          }
+        ],
+        "responses": {
+          "200" : {
+            "description": "Succes get category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Floor"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      },
+      "put": {
+        "security": [{
+          "FloorAuth" : []
+        }],
+        "tags": ["Floor API"],
+        "summary": "Update floor by Id",
+        "description": "Update Floor by Id",
+        "parameters": [
+          {
+            "name": "floorId",
+            "in": "path",
+            "description": "Floor Id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref":"#/components/schemas/CreateOrUpdateFloor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200" : {
+            "description": "Succes get category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Floor"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [{
+          "FloorAuth" : []
+        }],
+        "tags": [
+          "Floor API"
+        ],
+        "description": "List all Floor",
+        "summary": "List all Floors",
+        "responses": {
+          "200": {
+            "description": "Success delete all floors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "FloorAuth" : {
+        "type": "apiKey",
+        "in" : "header",
+        "name" : "X-API-Key",
+        "description": "Authentication for Floor API"
+      }
+    },
+    "schemas": {
+      "CreateOrUpdateFloor" : {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "number"
+          },
+          "capacity": {
+            "type": "number"
+          }
+        }
+      },
+      "Floor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "number": {
+            "type": "number"
+          },
+          "capacity": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

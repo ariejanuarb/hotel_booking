@@ -15,7 +15,7 @@ func NewDiscountRepository() DiscountRepository {
 	return &DiscountRepositoryImpl{}
 }
 
-func (disc DiscountRepositoryImpl) SaveDiscount(ctx context.Context, tx *sql.Tx, discount domain.Discount) domain.Discount {
+func (repository *DiscountRepositoryImpl) SaveDiscount(ctx context.Context, tx *sql.Tx, discount domain.Discount) domain.Discount {
 	SQL := "insert into discount(discount_request, discount_status, discount_amount) values (?, ?, ?)"
 	result, err := tx.ExecContext(ctx, SQL, discount.Discount_request, discount.Discount_status, discount.Discount_amount)
 	helper.PanicIfError(err)
@@ -27,7 +27,7 @@ func (disc DiscountRepositoryImpl) SaveDiscount(ctx context.Context, tx *sql.Tx,
 	return discount
 }
 
-func (disc DiscountRepositoryImpl) UpdateDiscount(ctx context.Context, tx *sql.Tx, discount domain.Discount) domain.Discount {
+func (repository *DiscountRepositoryImpl) UpdateDiscount(ctx context.Context, tx *sql.Tx, discount domain.Discount) domain.Discount {
 	SQL := "update discount set discount_status = ?, discount_amount = ? where discount_id = ?"
 	_, err := tx.ExecContext(ctx, SQL, discount.Discount_status, discount.Discount_amount, discount.Discount_id)
 	helper.PanicIfError(err)
@@ -35,13 +35,13 @@ func (disc DiscountRepositoryImpl) UpdateDiscount(ctx context.Context, tx *sql.T
 	return discount
 }
 
-func (disc DiscountRepositoryImpl) DeleteDiscount(ctx context.Context, tx *sql.Tx, discount domain.Discount) {
+func (repository *DiscountRepositoryImpl) DeleteDiscount(ctx context.Context, tx *sql.Tx, discount domain.Discount) {
 	SQL := "delete from discount where discount_id = ?"
 	_, err := tx.ExecContext(ctx, SQL, discount.Discount_id)
 	helper.PanicIfError(err)
 }
 
-func (disc DiscountRepositoryImpl) FindDiscountById(ctx context.Context, tx *sql.Tx, discountId int) (domain.Discount, error) {
+func (repository *DiscountRepositoryImpl) FindDiscountById(ctx context.Context, tx *sql.Tx, discountId int) (domain.Discount, error) {
 	SQL := "select discount_id, discount_request, discount_status, discount_amount from discount where discount_id = ?"
 	rows, err := tx.QueryContext(ctx, SQL, discountId)
 	helper.PanicIfError(err)
@@ -59,7 +59,7 @@ func (disc DiscountRepositoryImpl) FindDiscountById(ctx context.Context, tx *sql
 	}
 }
 
-func (disc DiscountRepositoryImpl) FindAllDiscount(ctx context.Context, tx *sql.Tx) []domain.Discount {
+func (repository *DiscountRepositoryImpl) FindAllDiscount(ctx context.Context, tx *sql.Tx) []domain.Discount {
 	SQL := "select discount_id, discount_request, discount_status, discount_amount from discount"
 	rows, err := tx.QueryContext(ctx, SQL)
 	helper.PanicIfError(err)

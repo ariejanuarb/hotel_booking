@@ -24,7 +24,7 @@ func NewDiscountService(discountRepository repository.DiscountRepository, db *sq
 	}
 }
 
-func (service DiscountServiceImpl) CreateDiscount(ctx context.Context, request web.DiscountCreateRequest) web.DiscountResponse {
+func (service *DiscountServiceImpl) CreateDiscount(ctx context.Context, request web.DiscountCreateRequest) web.DiscountResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -43,7 +43,7 @@ func (service DiscountServiceImpl) CreateDiscount(ctx context.Context, request w
 	return helper.ToDiscountResponse(discount)
 }
 
-func (service DiscountServiceImpl) UpdateDiscount(ctx context.Context, request web.DiscountUpdateRequest) web.DiscountResponse {
+func (service *DiscountServiceImpl) UpdateDiscount(ctx context.Context, request web.DiscountUpdateRequest) web.DiscountResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -63,7 +63,7 @@ func (service DiscountServiceImpl) UpdateDiscount(ctx context.Context, request w
 	return helper.ToDiscountResponse(discount)
 }
 
-func (service DiscountServiceImpl) DeleteDiscount(ctx context.Context, discountId int) {
+func (service *DiscountServiceImpl) DeleteDiscount(ctx context.Context, discountId int) {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
@@ -76,7 +76,7 @@ func (service DiscountServiceImpl) DeleteDiscount(ctx context.Context, discountI
 	service.DiscountRepository.DeleteDiscount(ctx, tx, discount)
 }
 
-func (service DiscountServiceImpl) FindDiscountById(ctx context.Context, discountId int) web.DiscountResponse {
+func (service *DiscountServiceImpl) FindDiscountById(ctx context.Context, discountId int) web.DiscountResponse {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)

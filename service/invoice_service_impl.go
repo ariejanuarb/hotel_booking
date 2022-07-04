@@ -24,11 +24,11 @@ func NewInvoiceService(invoiceRepository repository.InvoiceRepository, db *sql.D
 	}
 }
 
-func (i InvoiceServiceImpl) CreateInvoice(ctx context.Context, request web.InvoiceCreateRequest) web.InvoiceResponse {
-	err := i.Validate.Struct(request)
+func (service *InvoiceServiceImpl) CreateInvoice(ctx context.Context, request web.InvoiceCreateRequest) web.InvoiceResponse {
+	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
-	tx, err := i.DB.Begin()
+	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
 
@@ -38,19 +38,19 @@ func (i InvoiceServiceImpl) CreateInvoice(ctx context.Context, request web.Invoi
 		Price:        request.Price,
 		Total:        request.Total,
 	}
-	invoice = i.InvoiceRepository.SaveInvoice(ctx, tx, invoice)
+	invoice = service.InvoiceRepository.SaveInvoice(ctx, tx, invoice)
 	return helper.ToInvoiceResponse(invoice)
 }
 
-func (i InvoiceServiceImpl) UpdateInvoice(ctx context.Context, request web.InvoiceUpdateRequest) web.InvoiceResponse {
-	err := i.Validate.Struct(request)
+func (service *InvoiceServiceImpl) UpdateInvoice(ctx context.Context, request web.InvoiceUpdateRequest) web.InvoiceResponse {
+	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
-	tx, err := i.DB.Begin()
+	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
 
-	invoice, err := i.InvoiceRepository.FindInvoiceById(ctx, tx, request.Invoice_id)
+	invoice, err := service.InvoiceRepository.FindInvoiceById(ctx, tx, request.Invoice_id)
 	if err != nil {
 		helper.PanicIfError(err)
 	}
@@ -59,28 +59,28 @@ func (i InvoiceServiceImpl) UpdateInvoice(ctx context.Context, request web.Invoi
 	invoice.Price = request.Price
 	invoice.Total = request.Total
 
-	invoice = i.InvoiceRepository.UpdateInvoice(ctx, tx, invoice)
+	invoice = service.InvoiceRepository.UpdateInvoice(ctx, tx, invoice)
 	return helper.ToInvoiceResponse(invoice)
 }
 
-func (i InvoiceServiceImpl) DeleteInvoice(ctx context.Context, invoiceId int) {
-	tx, err := i.DB.Begin()
+func (service *InvoiceServiceImpl) DeleteInvoice(ctx context.Context, invoiceId int) {
+	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
 
-	invoice, err := i.InvoiceRepository.FindInvoiceById(ctx, tx, invoiceId)
+	invoice, err := service.InvoiceRepository.FindInvoiceById(ctx, tx, invoiceId)
 	if err != nil {
 		helper.PanicIfError(err)
 	}
-	i.InvoiceRepository.DeleteInvoice(ctx, tx, invoice)
+	service.InvoiceRepository.DeleteInvoice(ctx, tx, invoice)
 }
 
-func (i InvoiceServiceImpl) FindInvoiceById(ctx context.Context, invoiceId int) web.InvoiceResponse {
-	tx, err := i.DB.Begin()
+func (service *InvoiceServiceImpl) FindInvoiceById(ctx context.Context, invoiceId int) web.InvoiceResponse {
+	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
 
-	invoice, err := i.InvoiceRepository.FindInvoiceById(ctx, tx, invoiceId)
+	invoice, err := service.InvoiceRepository.FindInvoiceById(ctx, tx, invoiceId)
 	if err != nil {
 		helper.PanicIfError(err)
 	}
@@ -88,11 +88,11 @@ func (i InvoiceServiceImpl) FindInvoiceById(ctx context.Context, invoiceId int) 
 	return helper.ToInvoiceResponse(invoice)
 }
 
-func (i InvoiceServiceImpl) FindAllInvoice(ctx context.Context) []web.InvoiceResponse {
-	tx, err := i.DB.Begin()
+func (service *InvoiceServiceImpl) FindAllInvoice(ctx context.Context) []web.InvoiceResponse {
+	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
 
-	invoices := i.InvoiceRepository.FindAllInvoice(ctx, tx)
+	invoices := service.InvoiceRepository.FindAllInvoice(ctx, tx)
 	return helper.ToInvoiceResponses(invoices)
 }

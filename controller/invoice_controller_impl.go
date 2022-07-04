@@ -19,11 +19,11 @@ func NewInvoiceController(invoiceService service.InvoiceService) InvoiceControll
 	}
 }
 
-func (i InvoiceControllerImpl) CreateInvoice(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *InvoiceControllerImpl) CreateInvoice(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	invoiceCreateRequest := web.InvoiceCreateRequest{}
 	helper.ReadFromRequestBody(request, &invoiceCreateRequest)
 
-	invoiceResponse := i.InvoiceService.CreateInvoice(request.Context(), invoiceCreateRequest)
+	invoiceResponse := controller.InvoiceService.CreateInvoice(request.Context(), invoiceCreateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -33,7 +33,7 @@ func (i InvoiceControllerImpl) CreateInvoice(writer http.ResponseWriter, request
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (i InvoiceControllerImpl) UpdateInvoice(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *InvoiceControllerImpl) UpdateInvoice(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	invoiceUpdateRequest := web.InvoiceUpdateRequest{}
 	helper.ReadFromRequestBody(request, &invoiceUpdateRequest)
 
@@ -43,7 +43,7 @@ func (i InvoiceControllerImpl) UpdateInvoice(writer http.ResponseWriter, request
 
 	invoiceUpdateRequest.Invoice_id = id
 
-	invoiceResponse := i.InvoiceService.UpdateInvoice(request.Context(), invoiceUpdateRequest)
+	invoiceResponse := controller.InvoiceService.UpdateInvoice(request.Context(), invoiceUpdateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -53,12 +53,12 @@ func (i InvoiceControllerImpl) UpdateInvoice(writer http.ResponseWriter, request
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (i InvoiceControllerImpl) DeleteInvoice(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *InvoiceControllerImpl) DeleteInvoice(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	invoiceId := params.ByName("invoiceId")
 	id, err := strconv.Atoi(invoiceId)
 	helper.PanicIfError(err)
 
-	i.InvoiceService.DeleteInvoice(request.Context(), id)
+	controller.InvoiceService.DeleteInvoice(request.Context(), id)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -66,12 +66,12 @@ func (i InvoiceControllerImpl) DeleteInvoice(writer http.ResponseWriter, request
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (i InvoiceControllerImpl) FindInvoiceById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *InvoiceControllerImpl) FindInvoiceById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	invoiceId := params.ByName("invoiceId")
 	id, err := strconv.Atoi(invoiceId)
 	helper.PanicIfError(err)
 
-	invoiceResponse := i.InvoiceService.FindInvoiceById(request.Context(), id)
+	invoiceResponse := controller.InvoiceService.FindInvoiceById(request.Context(), id)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -81,8 +81,8 @@ func (i InvoiceControllerImpl) FindInvoiceById(writer http.ResponseWriter, reque
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (i InvoiceControllerImpl) FindAllInvoice(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	invoiceResponse := i.InvoiceService.FindAllInvoice(request.Context())
+func (controller *InvoiceControllerImpl) FindAllInvoice(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	invoiceResponse := controller.InvoiceService.FindAllInvoice(request.Context())
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",

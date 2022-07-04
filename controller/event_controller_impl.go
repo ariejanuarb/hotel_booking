@@ -19,11 +19,11 @@ func NewEventController(eventService service.EventService) EventController {
 	}
 }
 
-func (e EventControllerImpl) CreateEvent(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *EventControllerImpl) CreateEvent(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	eventCreateRequest := web.EventCreateRequest{}
 	helper.ReadFromRequestBody(request, &eventCreateRequest)
 
-	eventResponse := e.EventService.CreateEvent(request.Context(), eventCreateRequest)
+	eventResponse := controller.EventService.CreateEvent(request.Context(), eventCreateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -33,7 +33,7 @@ func (e EventControllerImpl) CreateEvent(writer http.ResponseWriter, request *ht
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (e EventControllerImpl) UpdateEvent(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *EventControllerImpl) UpdateEvent(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	eventUpdateRequest := web.EventUpdateRequest{}
 	helper.ReadFromRequestBody(request, &eventUpdateRequest)
 
@@ -43,7 +43,7 @@ func (e EventControllerImpl) UpdateEvent(writer http.ResponseWriter, request *ht
 
 	eventUpdateRequest.Event_id = id
 
-	eventResponse := e.EventService.UpdateEvent(request.Context(), eventUpdateRequest)
+	eventResponse := controller.EventService.UpdateEvent(request.Context(), eventUpdateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -53,12 +53,12 @@ func (e EventControllerImpl) UpdateEvent(writer http.ResponseWriter, request *ht
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (e EventControllerImpl) DeleteEvent(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *EventControllerImpl) DeleteEvent(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	eventId := params.ByName("eventId")
 	id, err := strconv.Atoi(eventId)
 	helper.PanicIfError(err)
 
-	e.EventService.DeleteEvent(request.Context(), id)
+	controller.EventService.DeleteEvent(request.Context(), id)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -66,12 +66,12 @@ func (e EventControllerImpl) DeleteEvent(writer http.ResponseWriter, request *ht
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (e EventControllerImpl) FindEventById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *EventControllerImpl) FindEventById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	eventId := params.ByName("eventId")
 	id, err := strconv.Atoi(eventId)
 	helper.PanicIfError(err)
 
-	eventResponse := e.EventService.FindEventById(request.Context(), id)
+	eventResponse := controller.EventService.FindEventById(request.Context(), id)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -81,8 +81,8 @@ func (e EventControllerImpl) FindEventById(writer http.ResponseWriter, request *
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (e EventControllerImpl) FindAllEvent(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	eventResponse := e.EventService.FindAllEvent(request.Context())
+func (controller *EventControllerImpl) FindAllEvent(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	eventResponse := controller.EventService.FindAllEvent(request.Context())
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",

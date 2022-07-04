@@ -15,7 +15,7 @@ func NewEventRepository() EventRepository {
 	return &EventRepositoryImpl{}
 }
 
-func (e EventRepositoryImpl) SaveEvent(ctx context.Context, tx *sql.Tx, event domain.Event) domain.Event {
+func (repository *EventRepositoryImpl) SaveEvent(ctx context.Context, tx *sql.Tx, event domain.Event) domain.Event {
 	SQL := "insert into event(event_start, event_end) values (?, ?)"
 	result, err := tx.ExecContext(ctx, SQL, event.Event_start, event.Event_End)
 
@@ -26,7 +26,7 @@ func (e EventRepositoryImpl) SaveEvent(ctx context.Context, tx *sql.Tx, event do
 	return event
 }
 
-func (e EventRepositoryImpl) UpdateEvent(ctx context.Context, tx *sql.Tx, event domain.Event) domain.Event {
+func (repository *EventRepositoryImpl) UpdateEvent(ctx context.Context, tx *sql.Tx, event domain.Event) domain.Event {
 	SQL := "update event set event_start = ?, event_end = ? where event_id = ?"
 	_, err := tx.ExecContext(ctx, SQL, event.Event_start, event.Event_End, event.Event_id)
 	helper.PanicIfError(err)
@@ -34,13 +34,13 @@ func (e EventRepositoryImpl) UpdateEvent(ctx context.Context, tx *sql.Tx, event 
 	return event
 }
 
-func (e EventRepositoryImpl) DeleteEvent(ctx context.Context, tx *sql.Tx, event domain.Event) {
+func (repository *EventRepositoryImpl) DeleteEvent(ctx context.Context, tx *sql.Tx, event domain.Event) {
 	SQL := "delete from event where event_id=?"
 	_, err := tx.ExecContext(ctx, SQL, event.Event_id)
 	helper.PanicIfError(err)
 }
 
-func (e EventRepositoryImpl) FindEventById(ctx context.Context, tx *sql.Tx, eventId int) (domain.Event, error) {
+func (repository *EventRepositoryImpl) FindEventById(ctx context.Context, tx *sql.Tx, eventId int) (domain.Event, error) {
 	SQL := "select event_id, event_start, event_end from event where event_id = ?"
 	rows, err := tx.QueryContext(ctx, SQL, eventId)
 	helper.PanicIfError(err)
@@ -58,7 +58,7 @@ func (e EventRepositoryImpl) FindEventById(ctx context.Context, tx *sql.Tx, even
 	}
 }
 
-func (e EventRepositoryImpl) FindAllEvent(ctx context.Context, tx *sql.Tx) []domain.Event {
+func (repository *EventRepositoryImpl) FindAllEvent(ctx context.Context, tx *sql.Tx) []domain.Event {
 	SQL := "select event_id, event_start, event_end from event"
 	rows, err := tx.QueryContext(ctx, SQL)
 	helper.PanicIfError(err)

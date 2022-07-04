@@ -19,11 +19,11 @@ func NewDiscountController(discountService service.DiscountService) DiscountCont
 	}
 }
 
-func (disc DiscountControllerImpl) CreateDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *DiscountControllerImpl) CreateDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	discountCreateRequest := web.DiscountCreateRequest{}
 	helper.ReadFromRequestBody(request, &discountCreateRequest)
 
-	discountResponse := disc.DiscountService.CreateDiscount(request.Context(), discountCreateRequest)
+	discountResponse := controller.DiscountService.CreateDiscount(request.Context(), discountCreateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -33,7 +33,7 @@ func (disc DiscountControllerImpl) CreateDiscount(writer http.ResponseWriter, re
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (disc DiscountControllerImpl) UpdateDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *DiscountControllerImpl) UpdateDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	discountUpdateRequest := web.DiscountUpdateRequest{}
 	helper.ReadFromRequestBody(request, &discountUpdateRequest)
 
@@ -43,7 +43,7 @@ func (disc DiscountControllerImpl) UpdateDiscount(writer http.ResponseWriter, re
 
 	discountUpdateRequest.Discount_id = id
 
-	discountResponse := disc.DiscountService.UpdateDiscount(request.Context(), discountUpdateRequest)
+	discountResponse := controller.DiscountService.UpdateDiscount(request.Context(), discountUpdateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -53,12 +53,12 @@ func (disc DiscountControllerImpl) UpdateDiscount(writer http.ResponseWriter, re
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (disc DiscountControllerImpl) DeleteDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *DiscountControllerImpl) DeleteDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	discountId := params.ByName("discountId")
 	id, err := strconv.Atoi(discountId)
 	helper.PanicIfError(err)
 
-	disc.DiscountService.DeleteDiscount(request.Context(), id)
+	controller.DiscountService.DeleteDiscount(request.Context(), id)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -66,12 +66,12 @@ func (disc DiscountControllerImpl) DeleteDiscount(writer http.ResponseWriter, re
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (disc DiscountControllerImpl) FindDiscountById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+func (controller *DiscountControllerImpl) FindDiscountById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	discountId := params.ByName("discountId")
 	id, err := strconv.Atoi(discountId)
 	helper.PanicIfError(err)
 
-	discountResponse := disc.DiscountService.FindDiscountById(request.Context(), id)
+	discountResponse := controller.DiscountService.FindDiscountById(request.Context(), id)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -81,8 +81,8 @@ func (disc DiscountControllerImpl) FindDiscountById(writer http.ResponseWriter, 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (disc DiscountControllerImpl) FindAllDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	discountResponse := disc.DiscountService.FindAllDiscount(request.Context())
+func (controller *DiscountControllerImpl) FindAllDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	discountResponse := controller.DiscountService.FindAllDiscount(request.Context())
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",

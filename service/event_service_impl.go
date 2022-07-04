@@ -24,7 +24,7 @@ func NewEventService(eventRepository repository.EventRepository, db *sql.DB, val
 	}
 }
 
-func (service EventServiceImpl) CreateEvent(ctx context.Context, request web.EventCreateRequest) web.EventResponse {
+func (service *EventServiceImpl) CreateEvent(ctx context.Context, request web.EventCreateRequest) web.EventResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -41,7 +41,7 @@ func (service EventServiceImpl) CreateEvent(ctx context.Context, request web.Eve
 	return helper.ToEventResponse(event)
 }
 
-func (service EventServiceImpl) UpdateEvent(ctx context.Context, request web.EventUpdateRequest) web.EventResponse {
+func (service *EventServiceImpl) UpdateEvent(ctx context.Context, request web.EventUpdateRequest) web.EventResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -60,7 +60,7 @@ func (service EventServiceImpl) UpdateEvent(ctx context.Context, request web.Eve
 	return helper.ToEventResponse(event)
 }
 
-func (service EventServiceImpl) DeleteEvent(ctx context.Context, eventId int) {
+func (service *EventServiceImpl) DeleteEvent(ctx context.Context, eventId int) {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
@@ -73,7 +73,7 @@ func (service EventServiceImpl) DeleteEvent(ctx context.Context, eventId int) {
 	service.EventRepository.DeleteEvent(ctx, tx, event)
 }
 
-func (service EventServiceImpl) FindEventById(ctx context.Context, eventId int) web.EventResponse {
+func (service *EventServiceImpl) FindEventById(ctx context.Context, eventId int) web.EventResponse {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
@@ -86,7 +86,7 @@ func (service EventServiceImpl) FindEventById(ctx context.Context, eventId int) 
 	return helper.ToEventResponse(event)
 }
 
-func (service EventServiceImpl) FindAllEvent(ctx context.Context) []web.EventResponse {
+func (service *EventServiceImpl) FindAllEvent(ctx context.Context) []web.EventResponse {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)

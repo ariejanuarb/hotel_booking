@@ -15,7 +15,7 @@ func NewInvoiceRepository() InvoiceRepository {
 	return &InvoiceRepositoryImpl{}
 }
 
-func (i InvoiceRepositoryImpl) SaveInvoice(ctx context.Context, tx *sql.Tx, invoice domain.Invoice) domain.Invoice {
+func (repository *InvoiceRepositoryImpl) SaveInvoice(ctx context.Context, tx *sql.Tx, invoice domain.Invoice) domain.Invoice {
 	SQL := "insert into invoice(invoice_date, tax, price, total) values (?, ?, ?, ?)"
 	result, err := tx.ExecContext(ctx, SQL, invoice.Invoice_Date, invoice.Tax, invoice.Price, invoice.Total)
 	helper.PanicIfError(err)
@@ -27,7 +27,7 @@ func (i InvoiceRepositoryImpl) SaveInvoice(ctx context.Context, tx *sql.Tx, invo
 	return invoice
 }
 
-func (i InvoiceRepositoryImpl) UpdateInvoice(ctx context.Context, tx *sql.Tx, invoice domain.Invoice) domain.Invoice {
+func (repository *InvoiceRepositoryImpl) UpdateInvoice(ctx context.Context, tx *sql.Tx, invoice domain.Invoice) domain.Invoice {
 	SQl := "update invoice set invoice_date = ?, tax = ?, price = ?, total = ? where invoice_id = ?"
 	_, err := tx.ExecContext(ctx, SQl, invoice.Invoice_Date, invoice.Tax, invoice.Price, invoice.Total, invoice.Invoice_id)
 	helper.PanicIfError(err)
@@ -35,13 +35,13 @@ func (i InvoiceRepositoryImpl) UpdateInvoice(ctx context.Context, tx *sql.Tx, in
 	return invoice
 }
 
-func (i InvoiceRepositoryImpl) DeleteInvoice(ctx context.Context, tx *sql.Tx, invoice domain.Invoice) {
+func (repository *InvoiceRepositoryImpl) DeleteInvoice(ctx context.Context, tx *sql.Tx, invoice domain.Invoice) {
 	SQL := "delete from invoice where invoice_id = ?"
 	_, err := tx.ExecContext(ctx, SQL, invoice.Invoice_id)
 	helper.PanicIfError(err)
 }
 
-func (i InvoiceRepositoryImpl) FindInvoiceById(ctx context.Context, tx *sql.Tx, invoiceId int) (domain.Invoice, error) {
+func (repository *InvoiceRepositoryImpl) FindInvoiceById(ctx context.Context, tx *sql.Tx, invoiceId int) (domain.Invoice, error) {
 	SQL := "select invoice_id, invoice_date, tax, price, total from invoice where invoice_id = ?"
 	rows, err := tx.QueryContext(ctx, SQL, invoiceId)
 	helper.PanicIfError(err)
@@ -60,7 +60,7 @@ func (i InvoiceRepositoryImpl) FindInvoiceById(ctx context.Context, tx *sql.Tx, 
 
 }
 
-func (i InvoiceRepositoryImpl) FindAllInvoice(ctx context.Context, tx *sql.Tx) []domain.Invoice {
+func (repository *InvoiceRepositoryImpl) FindAllInvoice(ctx context.Context, tx *sql.Tx) []domain.Invoice {
 	SQL := "select invoice_id, invoice_date, tax, price, total from invoice"
 	rows, err := tx.QueryContext(ctx, SQL)
 	helper.PanicIfError(err)

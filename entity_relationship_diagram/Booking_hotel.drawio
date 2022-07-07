@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-07-07T00:03:32.963Z" agent="5.0 (Windows)" etag="8dSzrtKHTkEXANYcvEMJ" version="20.0.4" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-07-07T04:38:35.891Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="HiTwOaqnoPva9LEYQCqU" version="20.0.4" type="github" pages="5">
   <diagram id="9UGvHK0S9YZ4UyB9R5i8" name="Project Flow">
-    <mxGraphModel dx="820" dy="645" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="667" dy="451" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -287,7 +287,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="EE-nKPK8BrA7O0fUe67l" name="ERD Master">
-    <mxGraphModel dx="3332" dy="460" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3884" dy="902" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1943,7 +1943,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="NEW ERD Master" id="a9OEWZPS1pDa2eBUnjam">
-    <mxGraphModel dx="3370" dy="645" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="1">
+    <mxGraphModel dx="3335" dy="531" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="1">
       <root>
         <mxCell id="qi-IPsIT8nw07dg1ib5E-0" />
         <mxCell id="qi-IPsIT8nw07dg1ib5E-1" parent="qi-IPsIT8nw07dg1ib5E-0" />
@@ -2353,7 +2353,7 @@
             <mxRectangle width="30" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="qi-IPsIT8nw07dg1ib5E-103" value="booking_list_id" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="qi-IPsIT8nw07dg1ib5E-101" vertex="1">
+        <mxCell id="qi-IPsIT8nw07dg1ib5E-103" value="booking_id" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="qi-IPsIT8nw07dg1ib5E-101" vertex="1">
           <mxGeometry x="30" width="170" height="30" as="geometry">
             <mxRectangle width="170" height="30" as="alternateBounds" />
           </mxGeometry>
@@ -2803,7 +2803,7 @@
             <mxRectangle width="140" height="20" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="i26OVLxNW2Y4NsICaHsa-134" value="varchar(100)" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="i26OVLxNW2Y4NsICaHsa-131" vertex="1">
+        <mxCell id="i26OVLxNW2Y4NsICaHsa-134" value="double" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="i26OVLxNW2Y4NsICaHsa-131" vertex="1">
           <mxGeometry x="170" width="113.57" height="20" as="geometry">
             <mxRectangle width="113.57" height="20" as="alternateBounds" />
           </mxGeometry>

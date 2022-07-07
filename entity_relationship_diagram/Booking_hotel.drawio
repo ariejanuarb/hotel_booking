@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-07T12:06:28.076Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="r29lNA0kRBgDStPzfd2Z" version="20.0.4" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-07-07T12:06:59.505Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="FXjrO3VO-fx8Agybrt_V" version="20.0.4" type="github" pages="5">
   <diagram id="9UGvHK0S9YZ4UyB9R5i8" name="Project Flow">
     <mxGraphModel dx="1906" dy="1289" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -4061,7 +4061,7 @@
             <mxRectangle width="30" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uGTCgTon1sxx7GsEEul2-2" value="discount_status" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="uGTCgTon1sxx7GsEEul2-0" vertex="1">
+        <mxCell id="uGTCgTon1sxx7GsEEul2-2" value="discount_amount" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="uGTCgTon1sxx7GsEEul2-0" vertex="1">
           <mxGeometry x="30" width="140" height="30" as="geometry">
             <mxRectangle width="140" height="30" as="alternateBounds" />
           </mxGeometry>

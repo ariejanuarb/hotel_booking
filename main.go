@@ -15,19 +15,12 @@ import (
 func main() {
 	db := app.NewDB()
 	validate := validator.New()
-	discountRepostiory := repository.NewDiscountRepository()
-	discountService := service.NewDiscountService(discountRepostiory, db, validate)
-	discountController := controller.NewDiscountController(discountService)
 
-	eventRepository := repository.NewEventRepository()
-	eventService := service.NewEventService(eventRepository, db, validate)
-	eventController := controller.NewEventController(eventService)
+	bookingRepository := repository.NewBookingRepository()
+	bookingService := service.NewBookingService(bookingRepository, db, validate)
+	bookingController := controller.NewBookingController(bookingService)
 
-	invoiceRepository := repository.NewInvoiceRepository()
-	invoiceService := service.NewInvoiceService(invoiceRepository, db, validate)
-	invoiceController := controller.NewInvoiceController(invoiceService)
-
-	router := app.NewRouter(discountController, eventController, invoiceController)
+	router := app.NewRouter(bookingController)
 
 	server := http.Server{
 		Addr:    "localhost:3080",

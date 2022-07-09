@@ -11,7 +11,8 @@ func NewRouter(bookingController controller.BookingController) *httprouter.Route
 
 	router.POST("/api/booking", bookingController.Create)
 	router.GET("/api/booking", bookingController.FindAll)
-	router.PUT("/api/booking/:bookingId", bookingController.Update)
+	router.PUT("/api/bookingStatus/:bookingId", bookingController.UpdateStatus)
+	router.PUT("/api/bookingDiscount/:bookingId", bookingController.UpdateDiscount)
 	router.GET("/api/booking/:bookingId", bookingController.FindById)
 
 	router.PanicHandler = exception.ErrorHandler

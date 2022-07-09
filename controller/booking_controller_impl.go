@@ -32,17 +32,36 @@ func (controller *BookingControllerImpl) Create(writer http.ResponseWriter, requ
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (controller *BookingControllerImpl) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	bookingUpdateRequest := web.BookingUpdateRequest{}
-	helper.ReadFromRequestBody(request, &bookingUpdateRequest)
+func (controller *BookingControllerImpl) UpdateStatus(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	UpdateStatusRequest := web.UpdateStatus{}
+	helper.ReadFromRequestBody(request, &UpdateStatusRequest)
 
 	bookingId := params.ByName("bookingId")
 	id, err := strconv.Atoi(bookingId)
 	helper.PanicIfError(err)
 
-	bookingUpdateRequest.Id = id
+	UpdateStatusRequest.Id = id
 
-	bookingResponse := controller.BookingService.Update(request.Context(), bookingUpdateRequest)
+	bookingResponse := controller.BookingService.UpdateStatus(request.Context(), UpdateStatusRequest)
+	webResponse := web.WebResponse{
+		Code:   200,
+		Status: "Ok",
+		Data:   bookingResponse,
+	}
+	helper.WriteToResponseBody(writer, webResponse)
+}
+
+func (controller *BookingControllerImpl) UpdateDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	updateDiscountRequest := web.UpdateDiscount{}
+	helper.ReadFromRequestBody(request, &updateDiscountRequest)
+
+	bookingId := params.ByName("bookingId")
+	id, err := strconv.Atoi(bookingId)
+	helper.PanicIfError(err)
+
+	updateDiscountRequest.Id = id
+
+	bookingResponse := controller.BookingService.UpdateDiscount(request.Context(), updateDiscountRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "Ok",

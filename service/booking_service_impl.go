@@ -35,19 +35,18 @@ func (service *BookingServiceImpl) Create(ctx context.Context, request web.Booki
 
 	booking := domain.Booking{
 		Status:      request.Status,
+		Room_id:     request.Room_id,
 		Pic_name:    request.Pic_name,
 		Pic_Contact: request.Pic_Contact,
-		Invoice:     request.Invoice,
 		Event_start: request.Event_start,
 		Event_end:   request.Event_end,
-		Room_id:     request.Room_id,
 	}
 	booking = service.BookingRepository.Save(ctx, tx, booking)
 
 	return helper.ToBookingResponse(booking)
 }
 
-func (service *BookingServiceImpl) Update(ctx context.Context, request web.BookingUpdateRequest) web.BookingResponse {
+func (service *BookingServiceImpl) UpdateStatus(ctx context.Context, request web.UpdateStatus) web.BookingResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -62,7 +61,28 @@ func (service *BookingServiceImpl) Update(ctx context.Context, request web.Booki
 	bookings := helper.ToBooking(bookingResponse)
 	bookings.Status = request.Status
 
-	bookings = service.BookingRepository.Update(ctx, tx, bookings)
+	bookings = service.BookingRepository.UpdateStatus(ctx, tx, bookings)
+
+	return helper.ToBookingResponse(bookings)
+}
+
+func (service *BookingServiceImpl) UpdateDiscount(ctx context.Context, request web.UpdateDiscount) web.BookingResponse {
+	err := service.Validate.Struct(request)
+	helper.PanicIfError(err)
+
+	tx, err := service.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollBack(tx)
+
+	bookingResponse, err := service.BookingRepository.FindById(ctx, tx, request.Id)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
+	bookings := helper.ToBooking(bookingResponse)
+	bookings.Discount_request = request.Discount_request
+	bookings.Discount_amount = request.Discount_amount
+
+	bookings = service.BookingRepository.UpdateDiscount(ctx, tx, bookings)
 
 	return helper.ToBookingResponse(bookings)
 }

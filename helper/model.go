@@ -8,30 +8,38 @@ import (
 
 func ToBookingResponse(b domain.Booking) web.BookingResponse {
 	return web.BookingResponse{
-		Id:          b.Id,
-		Status:      b.Status,
-		Pic_name:    b.Pic_name,
-		Pic_Contact: b.Pic_Contact,
-		Invoice:     b.Invoice,
-		Event_start: b.Event_start,
-		Event_end:   b.Event_end,
-		Room_id:     b.Room_id,
-		Created_at:  time.Now(),
+		Id:                 b.Id,
+		Status:             b.Status,
+		Room_id:            b.Room_id,
+		Pic_name:           b.Pic_name,
+		Pic_Contact:        b.Pic_Contact,
+		Event_start:        b.Event_start,
+		Event_end:          b.Event_end,
+		Invoice_number:     b.Invoice_number,
+		Invoice_subtotal:   b.Invoice_subtotal,
+		Invoice_grandtotal: b.Invoice_grandtotal,
+		Discount_amount:    b.Discount_amount,
+		Discount_request:   b.Discount_request,
+		Created_at:         time.Now(),
 	}
 }
 
 func ToBooking(b web.BookingResponse) domain.Booking {
 	return domain.Booking{
-		Id:          b.Id,
-		Status:      b.Status,
-		Pic_name:    b.Pic_name,
-		Pic_Contact: b.Pic_Contact,
-		Invoice:     b.Invoice,
-		Event_start: b.Event_start,
-		Event_end:   b.Event_end,
-		Room_id:     b.Room_id,
-		Created_at:  time.Now(),
-		Updated_at:  time.Now(),
+		Id:                 b.Id,
+		Status:             b.Status,
+		Room_id:            b.Room_id,
+		Pic_name:           b.Pic_name,
+		Pic_Contact:        b.Pic_Contact,
+		Event_start:        b.Event_start,
+		Event_end:          b.Event_end,
+		Invoice_number:     b.Invoice_number,
+		Invoice_subtotal:   b.Invoice_subtotal,
+		Invoice_grandtotal: b.Invoice_grandtotal,
+		Discount_amount:    b.Discount_amount,
+		Discount_request:   b.Discount_request,
+		Created_at:         time.Now(),
+		Updated_at:         time.Now(),
 	}
 }
 

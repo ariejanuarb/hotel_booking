@@ -7,6 +7,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"time"
 )
 
 type BookingRepositoryImpl struct {
@@ -17,8 +18,8 @@ func NewBookingRepository() BookingRepository {
 }
 
 func (repository *BookingRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, booking domain.Booking) domain.Booking {
-	SQL := "insert into booking(status, room_id, pic_name, pic_contact, event_start, event_end) values (?, ?, ?, ?, ?, ?)"
-	result, err := tx.ExecContext(ctx, SQL, booking.Status, booking.Room_id, booking.Pic_name, booking.Pic_Contact, booking.Event_start, booking.Event_end)
+	SQL := "insert into booking(status, room_id, pic_name, pic_contact, event_start, event_end, created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?, ?)"
+	result, err := tx.ExecContext(ctx, SQL, booking.Status, booking.Room_id, booking.Pic_name, booking.Pic_Contact, booking.Event_start, booking.Event_end, time.Now().Format("2006-01-02 15:04:05"), time.Now().Format("2006-01-02 15:04:05"))
 	helper.PanicIfError(err)
 
 	id, err := result.LastInsertId()
@@ -29,8 +30,8 @@ func (repository *BookingRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, b
 }
 
 func (repository *BookingRepositoryImpl) UpdateStatus(ctx context.Context, tx *sql.Tx, booking domain.Booking) domain.Booking {
-	SQL := "update booking set status = ? where id = ?"
-	_, err := tx.ExecContext(ctx, SQL, booking.Status, booking.Id)
+	SQL := "update booking set status = ?, updated_at= ? where id = ?"
+	_, err := tx.ExecContext(ctx, SQL, booking.Status, time.Now().Format("2006-01-02 15:04:05"), booking.Id)
 	helper.PanicIfError(err)
 
 	return booking
@@ -44,20 +45,20 @@ func (repository *BookingRepositoryImpl) UpdateDiscount(ctx context.Context, tx 
 	return booking
 }
 
-func (repository *BookingRepositoryImpl) GetEventEnd(ctx context.Context, tx *sql.Tx, bookingId int) (web.BookingResponse, error) {
-	SQL := "select event_end from booking where id = ?"
+func (repository *BookingRepositoryImpl) GetEvent(ctx context.Context, tx *sql.Tx, bookingId int) (web.BookingResponse, error) {
+	SQL := "select event_start, event_end, room_id from booking"
 	rows, err := tx.QueryContext(ctx, SQL, bookingId)
 	helper.PanicIfError(err)
 	defer rows.Close()
 
 	booking := web.BookingResponse{}
 	if rows.Next() {
-		err := rows.Scan(&booking.Event_end, &booking.Id)
+		err := rows.Scan(&booking.Event_start, &booking.Event_end, &booking.Room_id)
 		helper.PanicIfError(err)
 		defer rows.Close()
 		return booking, nil
 	} else {
-		return booking, errors.New("booking end is not found")
+		return booking, errors.New("booking is not found")
 	}
 }
 

@@ -10,7 +10,7 @@ type Booking struct {
 	Pic_Contact        string
 	Event_start        string
 	Event_end          string
-	Invoice_number     int
+	Invoice_number     string
 	Invoice_subtotal   string
 	Invoice_grandtotal string
 	Discount_request   string

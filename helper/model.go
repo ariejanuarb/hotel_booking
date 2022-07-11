@@ -3,7 +3,6 @@ package helper
 import (
 	"booking-hotel/model/domain"
 	"booking-hotel/model/web"
-	"time"
 )
 
 func ToBookingResponse(b domain.Booking) web.BookingResponse {
@@ -20,7 +19,8 @@ func ToBookingResponse(b domain.Booking) web.BookingResponse {
 		Invoice_grandtotal: b.Invoice_grandtotal,
 		Discount_amount:    b.Discount_amount,
 		Discount_request:   b.Discount_request,
-		Created_at:         time.Now(),
+		Created_at:         b.Created_at,
+		Updated_at:         b.Updated_at,
 	}
 }
 
@@ -38,8 +38,8 @@ func ToBooking(b web.BookingResponse) domain.Booking {
 		Invoice_grandtotal: b.Invoice_grandtotal,
 		Discount_amount:    b.Discount_amount,
 		Discount_request:   b.Discount_request,
-		Created_at:         time.Now(),
-		Updated_at:         time.Now(),
+		Created_at:         b.Created_at,
+		Updated_at:         b.Updated_at,
 	}
 }
 

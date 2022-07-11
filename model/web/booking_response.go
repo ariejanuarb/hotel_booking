@@ -11,7 +11,7 @@ type BookingResponse struct {
 	Pic_Contact        string    `json:"pic_Contact"`
 	Event_start        string    `json:"event_Start"`
 	Event_end          string    `json:"event_End"`
-	Invoice_number     int       `json:"invoice_Number"`
+	Invoice_number     string    `json:"invoice_Number"`
 	Invoice_subtotal   string    `json:"invoice_Subtotal"`
 	Invoice_grandtotal string    `json:"invoice_Grandtotal"`
 	Discount_request   string    `json:"discount_Request"`

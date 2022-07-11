@@ -11,7 +11,7 @@ type BookingRepository interface {
 	Save(ctx context.Context, tx *sql.Tx, booking domain.Booking) domain.Booking
 	UpdateStatus(ctx context.Context, tx *sql.Tx, booking domain.Booking) domain.Booking
 	UpdateDiscount(ctx context.Context, tx *sql.Tx, booking domain.Booking) domain.Booking
-	GetEventEnd(ctx context.Context, tx *sql.Tx, bookingId int) (web.BookingResponse, error)
+	GetEvent(ctx context.Context, tx *sql.Tx, bookingId int) (web.BookingResponse, error)
 	FindById(ctx context.Context, tx *sql.Tx, bookingId int) (web.BookingResponse, error)
 	FindAll(ctx context.Context, tx *sql.Tx) []web.BookingResponse
 }

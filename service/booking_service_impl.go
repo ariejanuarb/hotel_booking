@@ -28,7 +28,7 @@ func NewBookingService(bookingRepository repository.BookingRepository, db *sql.D
 	}
 }
 
-func (service *BookingServiceImpl) Create(ctx context.Context, request web.BookingCreateRequest) web.BookingResponse {
+func (service *BookingServiceImpl) Create(ctx context.Context, request *web.BookingCreateRequest) (*web.BookingResponse, error) {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -36,49 +36,74 @@ func (service *BookingServiceImpl) Create(ctx context.Context, request web.Booki
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
 
-	booking := domain.Booking{
-		Status:             request.Status,
+	startTime := request.Event_start
+	endTime := request.Event_end
+	roomId := request.Room_id
+
+	var price int
+
+	var priceHour string
+	var priceDay string
+
+	if startTime > time.Now().Format("2006-01-02 15:04:05") {
+		checkSchadules := service.BookingRepository.FindAll(ctx, tx)
+		for _, checkSchadule := range checkSchadules {
+			if roomId == checkSchadule.Room_id {
+				if startTime >= checkSchadule.Event_start {
+					if startTime <= checkSchadule.Event_end {
+						return nil, errors.New("Room is Full")
+					}
+				} else {
+					if endTime >= checkSchadule.Event_start {
+						return nil, errors.New("Room is Full")
+					}
+				}
+			}
+			layout := "2006-01-02 15:04:05"
+			timeStart, _ := time.Parse(layout, startTime)
+			timeEnd, _ := time.Parse(layout, endTime)
+			diff := timeEnd.Sub(timeStart).Hours()
+
+			priceHour = checkSchadule.Price_per_hour
+			priceDay = checkSchadule.Price_per_day
+
+			priceHours, _ := strconv.Atoi(priceHour)
+			priceDays, _ := strconv.Atoi(priceDay)
+			hourDay := time.Hour * 24
+
+			days := diff / float64(hourDay)
+
+			if days < 1 {
+				price = int(days) * priceHours
+			} else {
+				price = int(days) * priceDays
+			}
+		}
+	} else {
+		return nil, errors.New("Room is Full")
+	}
+
+	booking := &domain.Booking{
+		Status:             "Booked",
 		Room_id:            request.Room_id,
 		Pic_name:           request.Pic_name,
 		Pic_Contact:        request.Pic_Contact,
 		Event_start:        request.Event_start,
 		Event_end:          request.Event_end,
 		Invoice_number:     "INV-" + strconv.Itoa(request.Room_id) + "-" + time.Now().Format("20060402150405"),
-		Invoice_subtotal:   "",
-		Invoice_grandtotal: "",
+		Invoice_subtotal:   "price Hour: " + priceHour + " price day: " + priceDay,
+		Invoice_grandtotal: strconv.Itoa(price),
 		Discount_request:   "Pending",
 		Discount_amount:    "0,00",
-	}
-
-	startTime := request.Event_start
-	endTime := request.Event_end
-	roomId := request.Room_id
-
-	if startTime > time.Now().Format("2006-01-02 15:04:05") {
-		checkSchadule, err := service.BookingRepository.GetEvent(ctx, tx, request.Room_id)
-		if err == nil {
-			if roomId == checkSchadule.Room_id {
-				if startTime > checkSchadule.Event_start {
-					if startTime < checkSchadule.Event_end {
-						errors.New("Room is Full")
-					}
-				} else {
-					if endTime > checkSchadule.Event_start {
-						errors.New("Room is Full")
-					}
-				}
-			}
-		}
-	} else {
-		helper.PanicIfError(err)
+		Created_at:         time.Now(),
 	}
 
 	booking = service.BookingRepository.Save(ctx, tx, booking)
 
-	return helper.ToBookingResponse(booking)
+	return helper.ToBookingResponse(booking), nil
 }
 
-func (service *BookingServiceImpl) UpdateStatus(ctx context.Context, request web.UpdateStatus) web.BookingResponse {
+func (service *BookingServiceImpl) UpdateStatus(ctx context.Context, request *web.UpdateStatus) *web.BookingResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -90,15 +115,16 @@ func (service *BookingServiceImpl) UpdateStatus(ctx context.Context, request web
 	if err != nil {
 		panic(exception.NewNotFoundError(err.Error()))
 	}
-	bookings := helper.ToBooking(bookingResponse)
+	bookings := helper.ToBooking(*bookingResponse)
 	bookings.Status = request.Status
+	bookings.Updated_at = time.Now()
 
 	bookings = service.BookingRepository.UpdateStatus(ctx, tx, bookings)
 
 	return helper.ToBookingResponse(bookings)
 }
 
-func (service *BookingServiceImpl) UpdateDiscount(ctx context.Context, request web.UpdateDiscount) web.BookingResponse {
+func (service *BookingServiceImpl) UpdateDiscount(ctx context.Context, request *web.UpdateDiscount) *web.BookingResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -110,16 +136,17 @@ func (service *BookingServiceImpl) UpdateDiscount(ctx context.Context, request w
 	if err != nil {
 		panic(exception.NewNotFoundError(err.Error()))
 	}
-	bookings := helper.ToBooking(bookingResponse)
+	bookings := helper.ToBooking(*bookingResponse)
 	bookings.Discount_request = request.Discount_request
 	bookings.Discount_amount = request.Discount_amount
+	bookings.Updated_at = time.Now()
 
 	bookings = service.BookingRepository.UpdateDiscount(ctx, tx, bookings)
 
 	return helper.ToBookingResponse(bookings)
 }
 
-func (service *BookingServiceImpl) FindById(ctx context.Context, bookingId int) web.BookingResponse {
+func (service *BookingServiceImpl) FindById(ctx context.Context, bookingId int) *web.BookingResponse {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)
@@ -132,7 +159,7 @@ func (service *BookingServiceImpl) FindById(ctx context.Context, bookingId int) 
 	return booking
 }
 
-func (service *BookingServiceImpl) FindAll(ctx context.Context) []web.BookingResponse {
+func (service *BookingServiceImpl) FindAll(ctx context.Context) []*web.BookingResponse {
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollBack(tx)

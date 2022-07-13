@@ -13,7 +13,7 @@ type BookingControllerImpl struct {
 	BookingService service.BookingService
 }
 
-func NewBookingController(BookingService service.BookingService) BookingController {
+func NewBookingController(BookingService *service.BookingServiceImpl) BookingController {
 	return &BookingControllerImpl{
 		BookingService: BookingService,
 	}
@@ -23,7 +23,7 @@ func (controller *BookingControllerImpl) Create(writer http.ResponseWriter, requ
 	bookingCreateRequest := web.BookingCreateRequest{}
 	helper.ReadFromRequestBody(request, &bookingCreateRequest)
 
-	bookingResponse := controller.BookingService.Create(request.Context(), bookingCreateRequest)
+	bookingResponse, _ := controller.BookingService.Create(request.Context(), &bookingCreateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "Ok",
@@ -42,7 +42,7 @@ func (controller *BookingControllerImpl) UpdateStatus(writer http.ResponseWriter
 
 	UpdateStatusRequest.Id = id
 
-	bookingResponse := controller.BookingService.UpdateStatus(request.Context(), UpdateStatusRequest)
+	bookingResponse := controller.BookingService.UpdateStatus(request.Context(), &UpdateStatusRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "Ok",
@@ -61,7 +61,7 @@ func (controller *BookingControllerImpl) UpdateDiscount(writer http.ResponseWrit
 
 	updateDiscountRequest.Id = id
 
-	bookingResponse := controller.BookingService.UpdateDiscount(request.Context(), updateDiscountRequest)
+	bookingResponse := controller.BookingService.UpdateDiscount(request.Context(), &updateDiscountRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "Ok",

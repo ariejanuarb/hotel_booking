@@ -6,7 +6,8 @@ type BookingResponse struct {
 	Id                 int       `json:"id"`
 	Status             string    `json:"status"`
 	Room_id            int       `json:"room_Id"`
-	Room_name          string    `json:"room_Name"`
+	Price_per_hour     string    `json:"price_Per_Hour"`
+	Price_per_day      string    `json:"price_Per_Day"`
 	Pic_name           string    `json:"pic_Name"`
 	Pic_Contact        string    `json:"pic_Contact"`
 	Event_start        string    `json:"event_Start"`

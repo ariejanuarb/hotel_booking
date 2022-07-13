@@ -5,8 +5,8 @@ import (
 	"booking-hotel/model/web"
 )
 
-func ToBookingResponse(b domain.Booking) web.BookingResponse {
-	return web.BookingResponse{
+func ToBookingResponse(b *domain.Booking) *web.BookingResponse {
+	return &web.BookingResponse{
 		Id:                 b.Id,
 		Status:             b.Status,
 		Room_id:            b.Room_id,
@@ -24,8 +24,8 @@ func ToBookingResponse(b domain.Booking) web.BookingResponse {
 	}
 }
 
-func ToBooking(b web.BookingResponse) domain.Booking {
-	return domain.Booking{
+func ToBooking(b web.BookingResponse) *domain.Booking {
+	return &domain.Booking{
 		Id:                 b.Id,
 		Status:             b.Status,
 		Room_id:            b.Room_id,
@@ -46,7 +46,7 @@ func ToBooking(b web.BookingResponse) domain.Booking {
 func ToBookingResponses(b []domain.Booking) []web.BookingResponse {
 	var bookingResponses []web.BookingResponse
 	for _, booking := range b {
-		bookingResponses = append(bookingResponses, ToBookingResponse(booking))
+		bookingResponses = append(bookingResponses, *ToBookingResponse(&booking))
 	}
 	return bookingResponses
 }

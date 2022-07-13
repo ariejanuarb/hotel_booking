@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-13T16:55:13.957Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="5f3CSZXBNnifq9tT2eXv" version="20.1.1" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-07-13T17:32:55.799Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="PElRv5bylL2E6RfpM4eG" version="20.1.1" type="github" pages="5">
   <diagram id="9UGvHK0S9YZ4UyB9R5i8" name="Project Flow">
     <mxGraphModel dx="894" dy="449" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -5865,7 +5865,7 @@
         <mxCell id="S2FSgPBVptxz6QIcnaej-597" value="0..&lt;sup&gt;n&lt;/sup&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="-1320" y="78.5" width="40" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Zuzws_H9ZNRdqal8_maZ-1" value="user_hotel (assign to hotel)" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" vertex="1" parent="1">
+        <mxCell id="Zuzws_H9ZNRdqal8_maZ-1" value="user_hotel" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" vertex="1" parent="1">
           <mxGeometry x="-1730" y="100" width="260" height="131" as="geometry">
             <mxRectangle x="860" y="290" width="100" height="30" as="alternateBounds" />
           </mxGeometry>

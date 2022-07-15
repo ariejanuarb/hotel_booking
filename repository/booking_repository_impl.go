@@ -38,7 +38,7 @@ func (repository *BookingRepositoryImpl) UpdateStatus(ctx context.Context, tx *s
 }
 
 func (repository *BookingRepositoryImpl) UpdateDiscount(ctx context.Context, tx *sql.Tx, booking *domain.Booking) *domain.Booking {
-	SQL := "update booking set discount_request = ?, where id = ?"
+	SQL := "update booking set discount_request = ? where id = ?"
 	_, err := tx.ExecContext(ctx, SQL, booking.Discount_request, booking.Id)
 	helper.PanicIfError(err)
 
@@ -46,8 +46,8 @@ func (repository *BookingRepositoryImpl) UpdateDiscount(ctx context.Context, tx 
 }
 
 func (repository *BookingRepositoryImpl) ResponseDiscount(ctx context.Context, tx *sql.Tx, booking *domain.Booking) *domain.Booking {
-	SQL := "update booking set discount_request = ? where id = ?"
-	_, err := tx.ExecContext(ctx, SQL, booking.Discount_request, booking.Id)
+	SQL := "update booking set discount_request = ?, discount_amount = ? where id = ?"
+	_, err := tx.ExecContext(ctx, SQL, booking.Discount_request, booking.Discount_amount, booking.Id)
 	helper.PanicIfError(err)
 
 	return booking

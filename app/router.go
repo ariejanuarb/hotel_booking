@@ -13,7 +13,7 @@ func NewRouter(bookingController controller.BookingController) *httprouter.Route
 	router.GET("/api/booking", bookingController.FindAll)
 	router.PUT("/api/bookingStatus/:bookingId", bookingController.UpdateStatus)
 	router.PUT("/api/bookingDiscount/:bookingId", bookingController.UpdateDiscount)
-	router.PUT("/api/responseDiscoount/:bookingId", bookingController.ResponseDiscount)
+	router.PUT("/api/responseDiscount/:bookingId", bookingController.ResponseDiscount)
 	router.GET("/api/booking/:bookingId", bookingController.FindById)
 	router.GET("/api/bookingDiscount", bookingController.FindAllDiscount)
 

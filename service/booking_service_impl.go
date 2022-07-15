@@ -9,6 +9,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 	"github.com/go-playground/validator"
 	"strconv"
 	"time"
@@ -55,6 +56,7 @@ func (service *BookingServiceImpl) Create(ctx context.Context, request *web.Book
 							return nil, errors.New("Room is Full")
 						}
 					} else {
+						fmt.Println("Benar")
 						if endTime >= checkSchadule.Event_start {
 							return nil, errors.New("Room is Full")
 						}
@@ -64,7 +66,7 @@ func (service *BookingServiceImpl) Create(ctx context.Context, request *web.Book
 			priceHour = checkSchadule.Price_per_hour
 			priceDay = checkSchadule.Price_per_day
 		}
-		layout := "2006-01-02 15:04:05"
+		layout := "2006-01-02T15:04:05Z"
 
 		timeStart, _ := time.Parse(layout, startTime)
 		timeEnd, _ := time.Parse(layout, endTime)
@@ -78,12 +80,13 @@ func (service *BookingServiceImpl) Create(ctx context.Context, request *web.Book
 			days = int(diff / day)
 		}
 
-		if diff == day {
+		if int(diff)%24 == 0 {
 			price = priceDays * days
-		} else {
+		} else if diff < day {
 			price = priceHours * int(diff)
 		}
 	}
+
 	booking := &domain.Booking{
 		Status:             "Booked",
 		Room_id:            request.Room_id,
@@ -92,7 +95,7 @@ func (service *BookingServiceImpl) Create(ctx context.Context, request *web.Book
 		Event_start:        request.Event_start,
 		Event_end:          request.Event_end,
 		Invoice_number:     "INV-" + strconv.Itoa(request.Room_id) + "-" + time.Now().Format("20060402150405"),
-		Invoice_subtotal:   "Price Hour: " + priceHour + ", Price day: " + priceDay,
+		Invoice_subtotal:   priceHour + " or " + priceDay,
 		Invoice_grandtotal: strconv.Itoa(price),
 		Discount_request:   "Null",
 		Discount_amount:    "0,00",
@@ -125,7 +128,7 @@ func (service *BookingServiceImpl) UpdateStatus(ctx context.Context, request *we
 	return helper.ToBookingResponse(bookings)
 }
 
-func (service *BookingServiceImpl) UpdateDiscount(ctx context.Context, request *web.UpdateRequest) *web.BookingResponse {
+func (service *BookingServiceImpl) UpdateDiscount(ctx context.Context, request *web.UpdateDiscount) *web.BookingResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -146,7 +149,7 @@ func (service *BookingServiceImpl) UpdateDiscount(ctx context.Context, request *
 	return helper.ToBookingResponse(bookings)
 }
 
-func (service *BookingServiceImpl) ResponseDiscount(ctx context.Context, request *web.UpdateRequest) *web.BookingResponse {
+func (service *BookingServiceImpl) ResponseDiscount(ctx context.Context, request *web.ResponseDiscount) *web.BookingResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -160,10 +163,10 @@ func (service *BookingServiceImpl) ResponseDiscount(ctx context.Context, request
 	}
 	bookings := helper.ToBooking(*bookingResponse)
 	bookings.Discount_request = request.Discount_request
-	bookings.Discount_amount = "0.1"
+	bookings.Discount_amount = request.Discount_amount
 	bookings.Updated_at = time.Now()
 
-	bookings = service.BookingRepository.UpdateDiscount(ctx, tx, bookings)
+	bookings = service.BookingRepository.ResponseDiscount(ctx, tx, bookings)
 
 	return helper.ToBookingResponse(bookings)
 }

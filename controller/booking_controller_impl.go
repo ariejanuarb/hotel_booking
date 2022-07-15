@@ -43,7 +43,6 @@ func (controller *BookingControllerImpl) Create(writer http.ResponseWriter, requ
 
 func (controller *BookingControllerImpl) UpdateStatus(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	updateStatusRequest := web.UpdateRequest{}
-	helper.ReadFromRequestBody(request, &updateStatusRequest)
 
 	bookingId := params.ByName("bookingId")
 	id, err := strconv.Atoi(bookingId)
@@ -61,8 +60,7 @@ func (controller *BookingControllerImpl) UpdateStatus(writer http.ResponseWriter
 }
 
 func (controller *BookingControllerImpl) UpdateDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	updateDiscountRequest := web.UpdateRequest{}
-	helper.ReadFromRequestBody(request, &updateDiscountRequest)
+	updateDiscountRequest := web.UpdateDiscount{}
 
 	bookingId := params.ByName("bookingId")
 	id, err := strconv.Atoi(bookingId)
@@ -80,7 +78,7 @@ func (controller *BookingControllerImpl) UpdateDiscount(writer http.ResponseWrit
 }
 
 func (controller *BookingControllerImpl) ResponseDiscount(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	responseDiscountRequest := web.UpdateRequest{}
+	responseDiscountRequest := web.ResponseDiscount{}
 	helper.ReadFromRequestBody(request, &responseDiscountRequest)
 
 	bookingId := params.ByName("bookingId")
@@ -89,7 +87,7 @@ func (controller *BookingControllerImpl) ResponseDiscount(writer http.ResponseWr
 
 	responseDiscountRequest.Id = id
 
-	bookingResponse := controller.BookingService.UpdateDiscount(request.Context(), &responseDiscountRequest)
+	bookingResponse := controller.BookingService.ResponseDiscount(request.Context(), &responseDiscountRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "Ok",

@@ -1,3 +1,11 @@
-ganti nama di table discount dari "discount_ammount" menjadi "discount_amount"
-
-ganti event start dan event end dari time menjadi string biar bisa di insert sesuatu didalamnya
+CREATE TABLE `booking_hotel`.`booking`
+( `id` INT NOT NULL AUTO_INCREMENT ,
+  `status` VARCHAR(100) NOT NULL ,
+    `pic_name` VARCHAR(100) NOT NULL ,
+      `pic_contact` VARCHAR(100) NOT NULL ,
+        `invoice` VARCHAR(100) NOT NULL ,
+          `event_start` DATETIME NOT NULL ,
+            `event_end` DATETIME NOT NULL ,
+              `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+                `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+                    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
